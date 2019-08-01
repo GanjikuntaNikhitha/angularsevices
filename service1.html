@@ -1,0 +1,61 @@
+<html ng-app ="myApp">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+    <script>
+        // creating the service 
+        var CalculatorService = angular.module('CalculatorService', [])
+.service('Calculator', function () {
+    this.square = function (a) { return a*a};
+ this.add = function ( c ,d ) {
+     
+    var e = c +d;
+    return e;
+};
+});
+
+
+   
+
+var myApp = angular.module('myApp', ['CalculatorService']);
+myApp.controller('CalculatorController', function ($scope, Calculator) {
+
+   
+    $scope.firstnumber = "";
+    $scope.secondnumber = "";
+
+    $scope.findSum = function () {
+//SERVICE.FUNCTION NAME
+        $scope.sumanswer = Calculator.add($scope.firstnumber, $scope.secondnumber)
+    }
+    $scope.findSquare = function () {
+        // take the values from the user.
+        $scope.answer = Calculator.square($scope.firstnumber, $scope.secondnumber);
+    }
+});
+
+ </script>
+
+</head>
+<body>
+
+
+    <div class="container">
+        <div>
+            <div ng-controller="CalculatorController">
+                Enter a firstnumber:
+                <input type="number" ng-model="firstnumber">
+                <br></br>
+                Enter a Secondnumber:
+                <input type="number" ng-model="secondnumber">
+                <button  ng-click="findSquare()">Square</button>
+                <button  ng-click="findSum()">Sum</button>
+                <div>{{answer}}</div>
+                <div>{{sumanswer}}</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
